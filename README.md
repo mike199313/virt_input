@@ -8,7 +8,8 @@
 虚拟input device驱动实现说明
 	此处我们实现的input device，主要支持如下功能：
 	1. 我们实现EV_KEY类型的事件，主要是实现key的上报；
-	2. 因是虚拟设备，因此我们通过向sysfs的属性文件写入数据，模拟按键事件的发生（即模拟按键中断），而在sysfs的store接口中，我们通过调用input_report_key，实现事件的分发；
+	2. 因是虚拟设备，因此我们通过向sysfs的属性文件写入数据，模拟按键事件的发生（即模拟按键中断），
+	   而在sysfs的store接口中，我们通过调用input_report_key，实现事件的分发；
 	3. 在应用层通过打开/dev/input/eventX文件，并通过读取事件，监控按键事件；
 	4. 我们在platform driver的probe接口中，完成input device的注册、sysfs属性文件的注册操作。
 数据结构
@@ -36,7 +37,8 @@
 3. ./usr_test
 4. 重新打开一个终端，然后进入/sys/devices/platform/virtual_input_dev.0目录下，可查看到文件vinput_key
 5.向vinput_key中写入数据如echo 1 > vinput_key。则usr_test监控到vinput_key的值变化，即模拟了按键的按下动作。
-6.也可以结合模拟i2c 控制器、i2c设备，通过修改i2c设备的sysfs文件，从而触发虚拟按键的按下操作（可参考https://gitee.com/jerry_chg/virt_input实现）。
+6.也可以结合模拟i2c 控制器、i2c设备，通过修改i2c设备的sysfs文件，从而触发虚拟按键的按下操作
+ （可参考https://gitee.com/jerry_chg/virt_input实现）。
 
 
 #### 参与贡献
